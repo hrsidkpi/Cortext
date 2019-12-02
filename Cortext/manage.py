@@ -6,7 +6,7 @@ Command-line utility for administrative tasks.
 # https://docs.djangoproject.com/en/2.1/ref/django-admin/
 """
 
-# Shabtai was here
+# Shabtay was here
 
 import os
 import sys
