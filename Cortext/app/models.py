@@ -13,6 +13,7 @@ class Student(models.Model):
 
     ordering = ['username']
 
+
     def get_absolute_url(self):
         return reverse('model-detail-view', args=[str(self.id)])
 
