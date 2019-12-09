@@ -5,24 +5,21 @@
 <script src="../../static/app/scripts/jquery-1.10.2.js" ></script>
 
 <script>
-	$("#container").on('click-row.bs.table', function (e, row, $element) {
-		window.location = $element.data('href');
+	$(document).ready(function () {
+		$("#container").addClass("test");
+		$("#container").hover(
+			function () {
+				$("#container").css("background-color", "black");
+			}, function () {
+				$("#container").css("background-color", "gray");
+			}
+		);
 	});
-</script>
-
-<script>
-	$("#container").hover(
-		function () {
-			$(this).css("background-color", "black");
-		}, function () {
-			$(this).css("background-color", "gray");
-		}
-	);
 </script>
 
 <div class="jumbotron">
     <h1>Hello student {{username}}!</h1>
-    <table class="table" id="container">
+    <table class="table table-hover" id="container">
 		<thread>
 			<tr>
 				<th scope="col">Name</th>

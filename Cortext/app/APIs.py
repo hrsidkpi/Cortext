@@ -15,5 +15,5 @@ def attempt_login(user_id, password):
 	return False
 
 def get_user(user_id):
-	# user format: [user id, name]
-	return [user_id, name]
+	# user format: [user id, type(1=teacher, 2=student) name]
+	return [user_id, "Jordan", 2]

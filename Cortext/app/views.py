@@ -8,20 +8,17 @@ from django.http import HttpRequest
 from django.http import HttpResponseRedirect
 from APIs import *
 
-
-from .models import Student
-
 def home(request):
 	"""Renders the home page."""
 	assert isinstance(request, HttpRequest)
 	username = ""
 	type = -1
 	if 'userid' in request.session:
-		user = Student.objects.filter(username = request.session["username"])[0]
-		username = user.username
-		type = user.type
-		assignments = get_assignments_user(user.id)
-		print(type)
+		user = get_user(request.session["userid"])
+		userid = user[0]
+		name = user[1]
+		type = user[2]
+		assignments = get_assignments_user(userid)
 	else:
 		return login(request)
 	if type == 1:
@@ -33,7 +30,7 @@ def home(request):
 				'username':username,
 				'type':type,
 			})
-	if type == 0:
+	if type == 2:
 		return render(request,
 			'app/studenthome.html',
 			{
