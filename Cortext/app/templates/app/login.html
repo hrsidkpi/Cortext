@@ -2,24 +2,27 @@
 
 {% block content %}
 
-<h2>{{ title }}</h2>
+<h2>Login</h2>
 <div class="row">
     <div class="col-md-8">
         <section id="loginForm">
             <form action="." method="post" class="form-horizontal">
                 {% csrf_token %}
                 <h4>Use a local account to log in.</h4>
+                {% if error != "" and error != null %}
+                    <p style="color: red">ERROR: {{ error }}</p>
+                {% endif %}
                 <hr />
                 <div class="form-group">
                     <label for="id_username" class="col-md-2 control-label">User name</label>
                     <div class="col-md-10">
-                        {{ form.username }}
+                        <input type="text" id="username" name="username" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="id_password" class="col-md-2 control-label">Password</label>
                     <div class="col-md-10">
-                        {{ form.password }}
+                        <input type="password" id="password" name="password"/>
                     </div>
                 </div>
                 <div class="form-group">
