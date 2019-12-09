@@ -2,15 +2,36 @@
 
 {% block content %}
 
-<div class="jumbotron">
-    <h1>Django</h1>
-    {% if username != "" %}
-    <p>
-        Hello student {{username}}!
+<script src="../../static/app/scripts/jquery-1.10.2.js" ></script>
 
-		{% for assignment in assignments %}
-    </p>
-    {% endif %}
+<script>
+	$("#container").on('click-row.bs.table', function (e, row, $element) {
+		window.location = $element.data('href');
+	});
+</script>
+
+<div class="jumbotron">
+    <h1>Hello student {{username}}!</h1>
+    <table class="table" id="container">
+		<thread>
+			<tr>
+				<th scope="col">Name</th>
+				<th scope="col">Teacher</th>
+				<th scope="col">Due Date</th>
+			</tr>
+		</thread>
+		<tbody>
+			{% for assignment in assignments %}
+
+			<tr>
+				<td>{{ assignment.1 }}</td>
+				<td>{{ assignment.2 }}</td>
+				<td>{{ assignment.3 }}</td>
+			</tr>
+
+			{% endfor %}
+		</tbody>
+	</table>
 </div>
 
 {% endblock %}
