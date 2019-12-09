@@ -18,3 +18,9 @@ class Student(models.Model):
 
     def __str__(self):
         return self.username
+class School(models.Model):
+    id = models.CharField(primary_key=True)
+    name = models.CharField()
+
+    def __str__(self):
+        return self.name
