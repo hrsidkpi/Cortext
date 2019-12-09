@@ -1,0 +1,16 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h1>Django</h1>
+    {% if username != "" %}
+    <p>
+        Hello student {{username}}!
+
+		{% for assignment in assignments %}
+    </p>
+    {% endif %}
+</div>
+
+{% endblock %}
