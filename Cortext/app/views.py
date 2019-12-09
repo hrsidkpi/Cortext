@@ -8,7 +8,7 @@ from django.http import HttpRequest
 from django.http import HttpResponseRedirect
 from APIS import get_assignments_user
 
-from .models import Student
+from .models import *
 
 
 def home(request):
@@ -88,7 +88,6 @@ def register(request):
             return render(request, 'app/register.html', {
                 'errorTxt': 'Username already exsists',
             })
-
         s = Student.objects.create(username=request.POST['username'], password=request.POST['password'],
                                    type=request.POST['type'])
         s.save()
