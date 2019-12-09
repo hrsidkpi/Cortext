@@ -9,8 +9,8 @@ class User(models.Model):
     username = models.CharField(max_length=20)
     password = models.CharField(max_length=20)
     id = models.CharField(max_length=9, primary_key=True)
-    first_name = models.CharField()
-    last_name = models.CharField()
+    first_name = models.CharField(max_length=20)
+    last_name = models.CharField(max_length=20)
     def __str__(self):
         return self.first_name, self.last_name
 
@@ -22,7 +22,7 @@ class Student(User):
 
 class School(models.Model):
     id = models.CharField(max_length=6, primary_key=True)
-    name = models.CharField()
+    name = models.CharField(max_length=20)
 
     def __str__(self):
         return self.name
@@ -34,13 +34,13 @@ class Teacher(User):
 
 class Question(models.Model):
     assignment_id = models.IntegerField()
-    content = models.CharField()
+    content = models.CharField(max_length=20)
 
 
 class Submission(models.Model):
     student_id = models.CharField(max_length=9)
     teacher_id = models.CharField(max_length=9)
-    content = models.CharField()
+    content = models.CharField(max_length=20)
     assignment_id = models.IntegerField()
     grade = models.IntegerField(max_length=3)
 

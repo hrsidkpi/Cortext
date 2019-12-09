@@ -10,6 +10,16 @@
 	});
 </script>
 
+<script>
+	$("#container").hover(
+		function () {
+			$(this).css("background-color", "black");
+		}, function () {
+			$(this).css("background-color", "gray");
+		}
+	);
+</script>
+
 <div class="jumbotron">
     <h1>Hello student {{username}}!</h1>
     <table class="table" id="container">
