@@ -7,6 +7,7 @@ def Teacher(username, password, id, first_name, last_name):
     Teacher(username=username, password=password, id=id, first_name=first_name, last_name=last_name).save()
 
 
+
 def get_assignments_user(user_id):
     # assignment format:  [assignment id, name, teacher name, due date]
     # input: user id
