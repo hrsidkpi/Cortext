@@ -59,17 +59,25 @@ def login(request):
 	return render(request, 'app/login.html', {})
 
 def register(request):
+	# if 'user_id' in request.POST:
+	# 
+	# 	obj = Student.objects.filter(username=request.POST['username'])
+	# 	if len(obj) > 0:
+	# 		return render(request, 'app/register.html',{
+	# 				'errorTxt': 'Username already exsists',
+	# 			})
+	# 
+	# 	s = Student.objects.create(username=request.POST['username'], password=request.POST['password'], type=request.POST['type'])
+	# 	s.save()
+	# 	return HttpResponseRedirect("/login")
+	# 
+	# return render(request, 'app/register.html',{})
+	return None
+	
 
-	if 'user_id' in request.POST:
-
-		obj = Student.objects.filter(username=request.POST['username'])
-		if len(obj) > 0:
-			return render(request, 'app/register.html',{
-					'errorTxt': 'Username already exsists',
-				})
-
-		s = Student.objects.create(username=request.POST['username'], password=request.POST['password'], type=request.POST['type'])
-		s.save()
-		return HttpResponseRedirect("/login")
-
-	return render(request, 'app/register.html',{})
+def studentassignment(request):
+	return render(request,
+			'app/studentassignment.html',
+			{
+				'assignmentid': request.POST['assignmentid'],
+			})
