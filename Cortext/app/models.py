@@ -68,9 +68,8 @@ class files(models.Model):
 
 
 class class_student(models.Model):
-    class_id = models.CharField(max_length=9)
-    student_id = models.CharField(max_length=9)
-
+    class_id = models.charField(max_length=9)
+    student_id = models.charField(max_length=9)
 
 class assignments(models.Model):
     assignment_id = models.CharField(max_length=9)
@@ -82,11 +81,10 @@ class assignments(models.Model):
 class assignment_class(models.Model):
     assignment_id = models.CharField(max_length=9)
     class_id = models.CharField(max_length=9)
-    submission_date = models.DateField(auto_now_add=True)
-
+    submission_date = models.DateField(initial=datetime.date.today())
 
 class messages(models.Model):
     addressed_id = models.CharField(max_length=9)
     addressee_id = models.CharField(max_length=9)
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField(initial=datetime.date.today())
     message_content = models.CharField(max_length=255)
