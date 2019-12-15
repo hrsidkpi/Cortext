@@ -3,13 +3,24 @@
 {% block content %}
 
 <div class="jumbotron">
-    <h1>Showing assignment {{assignmentid}}!</h1>
+    <h1>{{assignment.1}}</h1>
 </div>
 
-<form>
-    <textarea>
-        אזור זה צריך להציג טקסט מטלה של תלמיד ולאפשר 
-    </textarea>
+<form id="form" method="post" name="form" action="/home/">
+
+    {% csrf_token %}
+
+    {% for q in questions %}
+        <h3>{{q}}</h3>
+        <textarea form="form" name="q{{q}}">טקסט ניתן לעריכה</textarea>
+    {% endfor %}
+
+    <br />
+    <br />
+    <input type="submit" value="שמור" />
+    <br />
+    <input type="submit" value="הגש"/>
+
 </form>
 
 {% endblock %}

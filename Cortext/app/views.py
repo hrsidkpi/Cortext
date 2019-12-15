@@ -6,7 +6,7 @@ from datetime import datetime
 from django.shortcuts import render
 from django.http import HttpRequest
 from django.http import HttpResponseRedirect
-from Cortext.app.APIs import *
+from app.APIs import *
 
 
 def home(request):
@@ -17,7 +17,7 @@ def home(request):
 	if 'userid' in request.session:
 		user = get_user(request.session["userid"])
 		userid = user[0]
-		name = user[1]
+		username = user[1]
 		type = user[2]
 		assignments = get_assignments_user(userid)
 	else:
@@ -43,11 +43,14 @@ def home(request):
 			})
 
 def studentassignment(request):
-	assignmentid = request.GET['assignmentid']
-	return render(request, 'app/studentassignment.html', {
-		'assignmentid': assignmentid
-		})
-	
+    assignmentid = request.POST['assignmentid']
+    assignment = get_assignment(assignmentid)
+    questions = get_questions_assignment(assignmentid)
+    return render(request, 'app/studentassignment.html', {
+        'assignment': assignment,
+        'questions': questions
+        })
+
 def login(request):
 	if 'user_id' in request.POST:
 		success = attempt_login(request.POST['user_id'],request.POST['password'])
@@ -74,11 +77,3 @@ def register(request):
 	# 
 	# return render(request, 'app/register.html',{})
 	return None
-	
-
-def studentassignment(request):
-	return render(request,
-			'app/studentassignment.html',
-			{
-				'assignmentid': request.POST['assignmentid'],
-			})
