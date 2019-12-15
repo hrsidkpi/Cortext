@@ -6,19 +6,18 @@ import datetime
 from django.db import models
 
 
-class User(object):
-    username = models.CharField(max_length=20)
-    password = models.CharField(max_length=20)
-    id = models.CharField(max_length=9, primary_key=True)
-    first_name = models.CharField(max_length=20)
-    last_name = models.CharField(max_length=20)
-    def __str__(self):
-        return self.first_name, self.last_name
-
 # Create your models here.
-class Student(User, models.Model):
+class Student(models.Model):
+    username = models.CharField(max_length=20,null=True, blank=True)
+    password = models.CharField(max_length=20, null=True, blank=True)
+    id = models.CharField(max_length=9, primary_key=True)
+    first_name = models.CharField(max_length=20, null=True, blank=True)
+    last_name = models.CharField(max_length=20, null=True, blank=True)
     age_group = models.IntegerField(default=-1)  # student's class
     school = models.ForeignKey('School', models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return self.first_name, self.last_name
 
 
 class School(models.Model):
@@ -29,8 +28,15 @@ class School(models.Model):
         return self.name
 
 
-class Teacher(User):
-    pass
+class Teacher(models.Model):
+    username = models.CharField(max_length=20, null=True, blank=True)
+    password = models.CharField(max_length=20, null=True, blank=True)
+    id = models.CharField(max_length=9, primary_key=True)
+    first_name = models.CharField(max_length=20, null=True, blank=True)
+    last_name = models.CharField(max_length=20, null=True, blank=True)
+
+    def __str__(self):
+        return self.first_name, self.last_name
 
 
 class Question(models.Model):
@@ -65,6 +71,7 @@ class class_student(models.Model):
     class_id = models.CharField(max_length=9)
     student_id = models.CharField(max_length=9)
 
+
 class assignments(models.Model):
     assignment_id = models.CharField(max_length=9)
     teacher_id = models.CharField(max_length=9)
@@ -77,11 +84,9 @@ class assignment_class(models.Model):
     class_id = models.CharField(max_length=9)
     submission_date = models.DateField(auto_now_add=True)
 
+
 class messages(models.Model):
     addressed_id = models.CharField(max_length=9)
     addressee_id = models.CharField(max_length=9)
     date = models.DateField(auto_now_add=True)
     message_content = models.CharField(max_length=255)
-
-
-
