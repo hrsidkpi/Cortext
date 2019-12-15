@@ -6,7 +6,8 @@ from datetime import datetime
 from django.shortcuts import render
 from django.http import HttpRequest
 from django.http import HttpResponseRedirect
-from APIs import *
+from Cortext.app.APIs import *
+
 
 def home(request):
 	"""Renders the home page."""

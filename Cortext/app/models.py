@@ -1,6 +1,7 @@
 """
 Definition of models.
 """
+import datetime
 
 from django.db import models
 
@@ -54,6 +55,33 @@ class teacher_student(models.Model):
     teacher_id = models.CharField(max_length=9)
     student_id = models.CharField(max_length=9)
 
+
+class files(models.Model):
+    path = models.CharField(max_length=255)
+    question_id = models.IntegerField(max_length=3)
+
+
+class class_student(models.Model):
+    class_id = models.charField(max_length=9)
+    student_id = models.charField(max_length=9)
+
+class assignments(models.Model):
+    assignment_id = models.CharField(max_length=9)
+    teacher_id = models.CharField(max_length=9)
+    description = models.CharField(max_length=255)
+    subject = models.CharField(max_length=40)
+
+
+class assignment_class(models.Model):
+    assignment_id = models.CharField(max_length=9)
+    class_id = models.CharField(max_length=9)
+    submission_date = models.DateField(initial=datetime.date.today())
+
+class messages(models.Model):
+    addressed_id = models.CharField(max_length=9)
+    addressee_id = models.CharField(max_length=9)
+    date = models.DateField(initial=datetime.date.today())
+    message_content = models.CharField(max_length=255)
 
 
 
