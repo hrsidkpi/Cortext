@@ -6,12 +6,12 @@
 
 <script>
 	$(document).ready(function () {
-		$("#container").addClass("test");
+		$(".container").addClass("test");
 		$(".assignment-link").click(
 			function () {
 				var url = 'studentassignment/';
 				var form = $('#finalform');
-				$('#assignmentid').val(this.id.split("assignment")[1]);
+				$('#assignmentid').val(this.id .split("assignment")[1]);
 				form.submit();
 			}
 		);
@@ -19,32 +19,56 @@
 </script>
 
 <div class="jumbotron">
-    <h1>Hello student {{username}}!</h1>
-    <table class="table table-hover" id="container">
+    <h1>Hello teacher {{username}}!</h1>
+
+    <script>
+        $(function () {
+            $('select').on('change', function () {
+                $('.selectedClass').hide();
+                $('.selectedClass').removeClass('selectedClass');
+                $('#' + this.value).show();
+                $('#' + this.value).addClass('selectedClass');
+            })
+            $('table').first().addClass('selectedClass');
+            $('table').not('.selectedClass').hide();
+        });
+    </script>
+
+    <select>
+        {% for class in classes %}
+            <option value="c{{class.0}}">{{class.1}}</option>
+        {% endfor %}
+    </select>
+    {% for class in classes %}
+    <table class="table table-hover container" id="c{{class.0}}">
 		<thread>
 			<tr>
 				<th scope="col">Name</th>
-				<th scope="col">Teacher</th>
 				<th scope="col">Due Date</th>
 			</tr>
 		</thread>
 		<tbody>
-			{% for assignment in assignments %}
+
+
+			{% for assignment in class.2 %}
 
 			<tr class="assignment-link" id="assignment{{assignment.0}}">
 				<td>{{ assignment.1 }}</td>
-				<td>{{ assignment.2 }}</td>
 				<td>
-                    {{ assignment.3 }}
-                    <span style="color: red">({{assignment.4}} left)</span>
+                    {{ assignment.2 }}
                 </td>
 			</tr>
 
 			{% endfor %}
 		</tbody>
 	</table>
+    {% endfor %}
 
-	<form id="finalform" hidden="hidden" method="post" action="/studentassignment/">
+    <form id="createAssignment" action="/createassignment/">
+        <input type="submit" name="createnew" value="new assignment" />
+    </form>
+
+	<form id="finalform" hidden="hidden" method="post" action="/editassignment/">
         {% csrf_token %}
 		<input type="text" name="assignmentid" id="assignmentid" />
 	</form>

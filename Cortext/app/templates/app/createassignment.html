@@ -1,0 +1,35 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <input form="finalform" type="text" placeholder="assignment name" />
+</div>
+
+<form id="finalform" method="post" name="form" action="/home/">
+
+    <script>
+        function addQuestion() {
+            $('#questions').append("<input type='text' /><br/>");
+        }
+    </script>
+
+    {% csrf_token %}
+
+    <p>Due date:</p>
+    <input type="date" />
+
+    <div id="questions"></div>
+
+    <br />
+    <div class="btn btn-primary " onclick="addQuestion()">Add Question</div>
+
+    <br />
+    <br />
+    <input type="submit" value="שמור" />
+    <br />
+    <input type="submit" value="שלח"/>
+
+</form>
+
+{% endblock %}

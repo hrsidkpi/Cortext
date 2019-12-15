@@ -25,7 +25,7 @@ def attempt_login(user_id, password):
 
 def get_user(user_id):
     # user format: [user id, type(1=teacher, 2=student) name]
-    return [user_id, "Jordan", 2]
+    return [user_id, "Jordan", 1]
 
 def get_assignment(assignment_id):
     if assignment_id == '0':
@@ -44,3 +44,16 @@ def get_questions_assignment(assignment_id):
                 "What does Dr. Cohen say can be done to prevent wars?",
                 "What is your opinion about the article?",
             ]
+
+def get_classes_teacher(teacher_id):
+    return [
+            
+            [0, "ז4", [
+                [0, "Write your opinion about school uniform", "21-12-2019"],
+                [2, "this question doesn't actually exist don't click it", "00-00-0000"]
+            ]],
+            [1, "ו5", [
+                [1, "Summerize Dr. Cohen's article", "26-12-2019"]
+            ]]
+            
+        ]
