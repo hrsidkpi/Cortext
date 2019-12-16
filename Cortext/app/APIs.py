@@ -47,6 +47,14 @@ def get_user(user_id):
         details.append(1)
     return details
 
+def get_current_user():
+    # like get_user, but return the current user that is logged in. Return None if 
+    # not currently logged in.
+    return get_user(0)
+
+def is_connected():
+    return get_user() != None
+
 def get_assignment(assignment_id):
     if assignment_id == '0':
         return [0, "Write your opinion about school uniform", "Batya", "21-12-2019", "2 days"]
