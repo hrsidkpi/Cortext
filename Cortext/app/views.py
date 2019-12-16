@@ -83,3 +83,14 @@ def register(request):
 
 def createassignment(request):
     return render(request, 'app/createassignment.html',{})
+
+def teacherassignment(request):
+    assignmentid = request.POST['assignmentid']
+    assignment = get_assignment(assignmentid)
+    questions = get_questions_assignment(assignmentid)
+    submissions = get_submissions_assignment(assignmentid)
+    return render(request, 'app/teacherassignment.html',{
+            'assignment':assignment,
+            'questions':questions,
+            'submissions':submissions,
+        })

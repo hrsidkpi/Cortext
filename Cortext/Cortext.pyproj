@@ -66,6 +66,7 @@
     <Content Include="app\templates\app\loginpartial.html" />
     <Content Include="app\templates\app\register.html" />
     <Content Include="app\templates\app\createassignment.html" />
+    <Content Include="app\templates\app\teacherassignment.html" />
     <Content Include="app\templates\app\studentassignment.html" />
     <Content Include="app\templates\app\teacherhome.html" />
     <Content Include="app\templates\app\studenthome.html" />

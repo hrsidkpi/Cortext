@@ -1,0 +1,47 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h1>{{assignment.1}}</h1>
+</div>
+
+<form id="form" method="post" name="form" action="/home/">
+
+    {% csrf_token %}
+
+    {% for q in questions %}
+    <textarea form="form" name="q{{q}}">{{q}}</textarea>
+    {% endfor %}
+
+    <br />
+    <br />
+    <input type="submit" value="שמור" />
+    <br />
+
+</form>
+
+<table class="table table-hover container">
+    <thread>
+        <tr>
+            <th scope="col">Student</th>
+            <th scope="col">Submission Date</th>
+        </tr>
+    </thread>
+    <tbody>
+
+
+        {% for submission in submissions %}
+
+        <tr class="submission-link" id="submission{{submission.0}}">
+            <td>{{ submission.1 }}</td>
+            <td>
+                {{ submission.2 }}
+            </td>
+        </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

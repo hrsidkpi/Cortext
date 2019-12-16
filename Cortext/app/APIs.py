@@ -57,3 +57,34 @@ def get_classes_teacher(teacher_id):
             ]]
             
         ]
+
+def get_submissions_assignment(assignment_id):
+    if assignment_id == '0':
+        return [
+                [2,
+                'Jordan',
+                '20-12-2019',
+                [
+                    "my opinions is that school uniforms are good"    
+                ]]
+            ]
+    if assignment_id == '1':
+        return [
+                [0,
+                'jordan',
+                '20-12-2019',
+                [
+                    'He says the reason is capitalism',
+                    'He says we need socialism',
+                    'My opinion is that the article is wrong, capitalism is good',
+                ]],
+                [1,
+                'Amit',
+                '22-12-2019',
+                [
+                    'I don\'t know',
+                    'He says rich people are evil or something',
+                    'I don\'t have opinions on things',
+                ]]
+            ]
+        
