@@ -28,7 +28,7 @@ def home(request):
             'app/teacherhome.html',
             {
                 'title':'Home Page',
-                'year':datetime.now().year,
+                # 'year':datetime.now().year,
                 'username':username,
                 'type':type,
                 'classes': classes
@@ -39,7 +39,7 @@ def home(request):
             'app/studenthome.html',
             {
                 'title':'Home Page',
-                'year':datetime.now().year,
+                # 'year':datetime.now().year,
                 'username':username,
                 'type':type,
                 'assignments': assignments,

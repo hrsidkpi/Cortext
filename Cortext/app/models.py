@@ -8,7 +8,7 @@ from django.db import models
 
 # Create your models here.
 class Student(models.Model):
-    username = models.CharField(max_length=20,null=True, blank=True)
+    username = models.CharField(max_length=20, null=True, blank=True)
     password = models.CharField(max_length=20, null=True, blank=True)
     id = models.CharField(max_length=9, primary_key=True)
     first_name = models.CharField(max_length=20, null=True, blank=True)
@@ -17,7 +17,7 @@ class Student(models.Model):
     school = models.ForeignKey('School', models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return self.first_name, self.last_name
+        return str(self.first_name) + " " + str(self.last_name)
 
 
 class School(models.Model):
@@ -36,20 +36,29 @@ class Teacher(models.Model):
     last_name = models.CharField(max_length=20, null=True, blank=True)
 
     def __str__(self):
-        return self.first_name, self.last_name
+        return str(self.first_name) + " " + str(self.last_name)
 
 
 class Question(models.Model):
+    question_id = models.IntegerField(primary_key=True)
     assignment_id = models.IntegerField(default=-1)
     content = models.CharField(max_length=20)
 
 
 class Submission(models.Model):
+    submission_id = models.IntegerField(primary_key=True)
     student_id = models.CharField(max_length=9)
     teacher_id = models.CharField(max_length=9)
-    content = models.CharField(max_length=20)
     assignment_id = models.IntegerField()
     grade = models.IntegerField()
+
+
+class Answers(models.Model):
+    answer_id = models.IntegerField(primary_key=True)
+    submission_id = models.IntegerField()
+    question_id = models.IntegerField()
+    content = models.TextField()
+
 
 
 class teacher_class(models.Model):
@@ -71,10 +80,11 @@ class class_student(models.Model):
     class_id = models.CharField(max_length=9)
     student_id = models.CharField(max_length=9)
 
+
 class assignments(models.Model):
     assignment_id = models.CharField(max_length=9)
     teacher_id = models.CharField(max_length=9)
-    description = models.CharField(max_length=255)
+    description = models.TextField()
     subject = models.CharField(max_length=40)
 
 
@@ -82,6 +92,7 @@ class assignment_class(models.Model):
     assignment_id = models.CharField(max_length=9)
     class_id = models.CharField(max_length=9)
     submission_date = models.DateField(default=datetime.date.today())
+
 
 class messages(models.Model):
     addressed_id = models.CharField(max_length=9)
