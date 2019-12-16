@@ -36,13 +36,13 @@ def get_assignment(assignment_id):
 def get_questions_assignment(assignment_id):
     if assignment_id == '0':
         return [
-                "What is your opinion about school uniform?",
+                [0,"What is your opinion about school uniform?"],
             ]
     if assignment_id == '1':
         return [
-                "What does Dr. Cohen say the reason for World War I was?",
-                "What does Dr. Cohen say can be done to prevent wars?",
-                "What is your opinion about the article?",
+                [1,"What does Dr. Cohen say the reason for World War I was?"],
+                [2,"What does Dr. Cohen say can be done to prevent wars?"],
+                [3,"What is your opinion about the article?"],
             ]
 
 def get_classes_teacher(teacher_id):
@@ -71,7 +71,7 @@ def get_submissions_assignment(assignment_id):
     if assignment_id == '1':
         return [
                 [0,
-                'jordan',
+                'Jordan',
                 '20-12-2019',
                 [
                     'He says the reason is capitalism',
@@ -87,4 +87,41 @@ def get_submissions_assignment(assignment_id):
                     'I don\'t have opinions on things',
                 ]]
             ]
-        
+
+
+def get_assignment_submission(submissionid):
+    if submissionid == '0':
+        return ['1',  "Summerize Dr. Cohen's article", "26-12-2019"]
+    if submissionid == '1':
+        return ['1', "Summerize Dr. Cohen's article", "26-12-2019"]
+    if submissionid == '2':
+        return ['0', "Write your opinion about school uniform"]
+
+def get_submission(submissionid):
+    if submissionid == '0':
+        return [0,
+                'Jordan',
+                '20-12-2019',
+                [
+                    'He says the reason is capitalism',
+                    'He says we need socialism',
+                    'My opinion is that the article is wrong, capitalism is good',
+                ]]
+    if submissionid == '1':
+        return [1,
+                'Amit',
+                '22-12-2019',
+                [
+                    'I don\'t know',
+                    'He says rich people are evil or something',
+                    'I don\'t have opinions on things',
+                ]]
+
+    if submissionid == '2':
+        return [2,
+                'Jordan',
+                '20-12-2019',
+                [
+                    "my opinions is that school uniforms are good"    
+                ]]
+

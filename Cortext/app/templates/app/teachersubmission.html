@@ -1,0 +1,26 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h1>{{submission.1}}'s submission for {{assignment.1}}</h1>
+</div>
+
+<form id="form" method="post" name="form" action="/home/">
+
+    {% csrf_token %}
+
+    {% for a in answers %}
+    <h3>{{a.1}}</h3>
+    <p>{{a.2}}</p>
+    <textarea form="form" name="notes{{a.0}}">notes...</textarea>
+    {% endfor %}
+
+    <br />
+    <br />
+    <input type="submit" value="שמור" />
+    <br />
+
+</form>
+
+{% endblock %}

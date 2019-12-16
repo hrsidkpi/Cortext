@@ -6,6 +6,20 @@
     <h1>{{assignment.1}}</h1>
 </div>
 
+<script src="../../static/app/scripts/jquery-1.10.2.js" ></script>
+
+<script>
+    $(document).ready(function () {
+		$(".submission-link").click(
+            function () {
+				var form = $('#finalform');
+				$('#submissionid').val(this.id.split("submission")[1]);
+				form.submit();
+			}
+		)
+	});
+</script>
+
 <form id="form" method="post" name="form" action="/home/">
 
     {% csrf_token %}
@@ -43,5 +57,10 @@
         {% endfor %}
     </tbody>
 </table>
+
+<form id="finalform" hidden="hidden" method="post" action="/teachersubmission/">
+    {% csrf_token %}
+    <input type="text" name="submissionid" id="submissionid" />
+</form>
 
 {% endblock %}
