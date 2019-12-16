@@ -52,16 +52,21 @@ def get_current_user():
     # not currently logged in.
     return get_user(0)
 
+# Already implemented, no need to change
 def is_connected():
     return get_user() != None
 
+# get data on assignment from assignment id
 def get_assignment(assignment_id):
+        # format: [assignment_id, title, teacher name, due date, time left (formatted for printing)]
     if assignment_id == '0':
         return [0, "Write your opinion about school uniform", "Batya", "21-12-2019", "2 days"]
     if assignment_id == '1':
         return [1, "Summerize Dr. Cohen's article", "Batya", "26-12-2019", "7 days"]
 
+# Get a list of questions for the assignment id
 def get_questions_assignment(assignment_id):
+    # format:[  [question_id, question_text] , ...  ]
     if assignment_id == '0':
         return [
                 [0,"What is your opinion about school uniform?"],
@@ -73,7 +78,13 @@ def get_questions_assignment(assignment_id):
                 [3,"What is your opinion about the article?"],
             ]
 
+
+# get assignments grouped by class for a teacher id
 def get_classes_teacher(teacher_id):
+
+    # class format: [class_id, class_name, [assignment 1, assignment 2, ...]]
+    # assignment format: [assignment id, title, due date]
+
     return [
             
             [0, "ז4", [
@@ -86,7 +97,10 @@ def get_classes_teacher(teacher_id):
             
         ]
 
+# get all submissions for an assignment
 def get_submissions_assignment(assignment_id):
+    # submission format: [submission_id, submitting student name, submission date, list of answers]
+
     if assignment_id == '0':
         return [
                 [2,
@@ -117,15 +131,19 @@ def get_submissions_assignment(assignment_id):
             ]
 
 
+# get assignment from a submission id
 def get_assignment_submission(submissionid):
+    # assignment format: [id, title, due date]
     if submissionid == '0':
         return ['1',  "Summerize Dr. Cohen's article", "26-12-2019"]
     if submissionid == '1':
         return ['1', "Summerize Dr. Cohen's article", "26-12-2019"]
     if submissionid == '2':
-        return ['0', "Write your opinion about school uniform"]
+        return ['0', "Write your opinion about school uniform", "12-12-1212"]
 
+# get a submission from submission id
 def get_submission(submissionid):
+    #submission format: [id, student name, submission date, list of answers]
     if submissionid == '0':
         return [0,
                 'Jordan',
