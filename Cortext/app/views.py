@@ -68,14 +68,23 @@ def login(request):
 def register(request):
     if 'user_id' in request.POST:
 
-        obj = Student.objects.filter(username=request.POST['username'])
-        if len(obj) > 0:
+        if user_exists(request.POST['user_id']):
             return render(request, 'app/register.html',{
                     'errorTxt': 'Username already exsists',
                 })
 
-        s = Student.objects.create(username=request.POST['username'], password=request.POST['password'], type=request.POST['type'])
-        s.save()
+        user_id = request.POST['user_id']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        type = request.POST['type']
+        password = request.POST['password']
+
+        if type == '1':
+            create_teacher(user_id, password, first_name, last_name)
+        if type=='2':
+            school = request.POST['school']
+            create_student(user_id, password, first_name, last_name, school, -1)
+
         return HttpResponseRedirect("/login")
 
     return render(request, 'app/register.html',{})

@@ -1,14 +1,18 @@
 # from Cortext.app.models import *
 from .models import *
 
-def student(username, password, id, first_name, last_name, school, agegroup):
-    Student(username=username, password=password, id=id, first_name=first_name, last_name=last_name, school=school,
+def create_student( id, password,first_name, last_name, school, agegroup):
+    Student(password=password, id=id, first_name=first_name, last_name=last_name, school=school,
             agegroup=agegroup).save()
 
 
-def teacher(username, password, id, first_name, last_name):
-    Teacher(username=username, password=password, id=id, first_name=first_name, last_name=last_name).save()
+def create_teacher(id,password,  first_name, last_name):
+    Teacher(password=password, id=id, first_name=first_name, last_name=last_name).save()
 
+
+# return weather the user id is already registered
+def user_exists(user_id):
+    return True
 
 def get_assignments_user(user_id):
     # assignment format:  [assignment id, name, teacher name, due date]
@@ -20,6 +24,8 @@ def get_assignments_user(user_id):
 
 
 # Return true if the user_id and password match and false if not
+# if login successful, remember the logged in user (in session).
+# get_current_user() should work after this.
 def attempt_login(user_id, password):
     student = Student.objects.filter(pk=user_id, password=password)
     if len(student) == 1:
