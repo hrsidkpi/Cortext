@@ -60,7 +60,6 @@ class Answers(models.Model):
     content = models.TextField()
 
 
-
 class teacher_class(models.Model):
     teacher_id = models.CharField(max_length=9)
     school_id = models.CharField(max_length=6)
