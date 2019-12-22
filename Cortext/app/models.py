@@ -61,7 +61,7 @@ class Answers(models.Model):
 
 class teacher_class(models.Model):
     teacher_id = models.CharField(max_length=9)
-    school_id = models.CharField(max_length=6)
+    class_id = models.CharField(max_length=10)
 
 
 class teacher_student(models.Model):
@@ -75,7 +75,7 @@ class files(models.Model):
 
 
 class class_student(models.Model):
-    class_id = models.CharField(max_length=9)
+    class_id = models.CharField(max_length=10)
     student_id = models.CharField(max_length=9)
 
 
@@ -90,7 +90,7 @@ class assignments(models.Model):
 
 class assignment_class(models.Model):
     assignment_id = models.CharField(max_length=9)
-    class_id = models.CharField(max_length=9)
+    class_id = models.CharField(max_length=10)
     submission_date = models.DateField(default=datetime.date.today())
 
 

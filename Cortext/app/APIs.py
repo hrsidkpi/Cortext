@@ -94,21 +94,27 @@ def get_questions_assignment(assignment_id):
 
 
 # get assignments grouped by class for a teacher id
+def get_class_name(class_id):
+    int_to_letters = {"01": "א", "02": "ב", "03": "ג", "04": "ד", "05": "ה", "06": "ו", "07": "ז", "08": "ח", "09": "ט",
+                      "10": "י", "11": "יא", "12": "יב"}
+    class_number = class_id[-1] if class_id[8] == '0' else class_id[8:10]
+    return int_to_letters[class_id[6:8]] + class_number
+
+
 def get_classes_teacher(teacher_id):
     # class format: [class_id, class_name, [assignment 1, assignment 2, ...]]
     # assignment format: [assignment id, title, due date]
-
-    return [
-
-        [0, "ז4", [
-            [0, "Write your opinion about school uniform", "21-12-2019"],
-            [2, "this question doesn't actually exist don't click it", "00-00-0000"]
-        ]],
-        [1, "ו5", [
-            [1, "Summerize Dr. Cohen's article", "26-12-2019"]
-        ]]
-
-    ]
+    teacher_classes = teacher_class.objects.filter(teacher_id=teacher_id)
+    ret = []
+    for c in teacher_classes:
+        new_class = [c.class_id, get_class_name(c.class_id)]
+        assignments = assignment_class.objects.filter(class_id=c.class_id)
+        assignments_ids = [assignment.assignment_id for assignment in assignments]
+        assignments_list = [get_assignment(assignment_id)[0:2] + [get_assignment(assignment_id)[3]] for assignment_id in
+                            assignments_ids]
+        new_class.append(assignments_list)
+        ret.append(new_class)
+    return ret
 
 
 # get all submissions for an assignment
