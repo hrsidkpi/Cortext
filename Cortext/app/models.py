@@ -5,7 +5,6 @@ import datetime
 
 from django.db import models
 
-
 # Create your models here.
 class Student(models.Model):
     username = models.CharField(max_length=20, null=True, blank=True)
@@ -42,15 +41,15 @@ class Teacher(models.Model):
 class Question(models.Model):
     question_id = models.IntegerField(primary_key=True)
     assignment_id = models.IntegerField(default=-1)
-    content = models.CharField(max_length=20)
+    content = models.TextField()
 
 
 class Submission(models.Model):
     submission_id = models.IntegerField(primary_key=True)
     student_id = models.CharField(max_length=9)
-    teacher_id = models.CharField(max_length=9)
+    # teacher_id = models.CharField(max_length=9)
     assignment_id = models.IntegerField()
-    grade = models.IntegerField()
+    grade = models.IntegerField(default=-1)
 
 
 class Answers(models.Model):
@@ -81,10 +80,12 @@ class class_student(models.Model):
 
 
 class assignments(models.Model):
-    assignment_id = models.CharField(max_length=9)
+    assignment_id = models.IntegerField(primary_key=True)
     teacher_id = models.CharField(max_length=9)
     description = models.TextField()
     subject = models.CharField(max_length=40)
+    due_date = models.DateTimeField(default=datetime.datetime.now, blank=True)
+
 
 
 class assignment_class(models.Model):
