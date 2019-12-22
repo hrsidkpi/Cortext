@@ -121,73 +121,23 @@ def get_classes_teacher(teacher_id):
 def get_submissions_assignment(assignment_id):
     # submission format: [submission_id, submitting student name, submission date, list of answers]
 
-    if assignment_id == '0':
-        return [
-            [2,
-             'Jordan',
-             '20-12-2019',
-             [
-                 "my opinions is that school uniforms are good"
-             ]]
-        ]
-    if assignment_id == '1':
-        return [
-            [0,
-             'Jordan',
-             '20-12-2019',
-             [
-                 'He says the reason is capitalism',
-                 'He says we need socialism',
-                 'My opinion is that the article is wrong, capitalism is good',
-             ]],
-            [1,
-             'Amit',
-             '22-12-2019',
-             [
-                 'I don\'t know',
-                 'He says rich people are evil or something',
-                 'I don\'t have opinions on things',
-             ]]
-        ]
+    submissions = Submission.objects.filter(assignment_id=assignment_id)
+    return [get_submission(s.submission_id) for s in submissions]
 
 
 # get assignment from a submission id
+# assignment format: [assignment_id, title, due date]
 def get_assignment_submission(submissionid):
-    # assignment format: [id, title, due date]
-    if submissionid == '0':
-        return ['1', "Summerize Dr. Cohen's article", "26-12-2019"]
-    if submissionid == '1':
-        return ['1', "Summerize Dr. Cohen's article", "26-12-2019"]
-    if submissionid == '2':
-        return ['0', "Write your opinion about school uniform", "12-12-1212"]
+    submission = Submission.objects.filter(pk=submissionid)[0]
+    assignment = assignments.objects.filter(pk=submission.assignment_id)[0]
+    return [assignment.assignment_id, assignment.description, assignment.due_date]
 
 
 # get a submission from submission id
 def get_submission(submissionid):
-    # submission format: [id, student name, submission date, list of answers]
-    if submissionid == '0':
-        return [0,
-                'Jordan',
-                '20-12-2019',
-                [
-                    'He says the reason is capitalism',
-                    'He says we need socialism',
-                    'My opinion is that the article is wrong, capitalism is good',
-                ]]
-    if submissionid == '1':
-        return [1,
-                'Amit',
-                '22-12-2019',
-                [
-                    'I don\'t know',
-                    'He says rich people are evil or something',
-                    'I don\'t have opinions on things',
-                ]]
-
-    if submissionid == '2':
-        return [2,
-                'Jordan',
-                '20-12-2019',
-                [
-                    "my opinions is that school uniforms are good"
-                ]]
+    submission = Submission.objects.filter(pk=submissionid)[0]
+    sub_student = Student.objects.filter(pk=submission.student_id)[0]
+    answers = Answers.objects.filter(submission_id=submissionid)
+    answers = [a.content for a in answers]
+    sub_date = submission.sub_date
+    return [submissionid, str(sub_student), sub_date, answers]

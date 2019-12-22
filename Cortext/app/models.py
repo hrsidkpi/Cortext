@@ -50,6 +50,7 @@ class Submission(models.Model):
     # teacher_id = models.CharField(max_length=9)
     assignment_id = models.IntegerField()
     grade = models.IntegerField(default=-1)
+    sub_date = models.DateTimeField(default=datetime.datetime.now, blank=True)
 
 
 class Answers(models.Model):
