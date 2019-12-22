@@ -82,7 +82,7 @@ def get_assignment(assignment_id):
     diff = curr_assignment.due_date.date() - today
     days = diff.days
     return [assignment_id, curr_assignment.description, str(curr_teacher),
-            curr_assignment.due_date.strftime("%m/%d/%Y, %H:%M:%S"),
+            curr_assignment.due_date.strftime("%d/%m/%Y, %H:%M:%S"),
             str(days) + " days"]
 
 
