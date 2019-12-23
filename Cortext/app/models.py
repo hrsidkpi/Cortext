@@ -84,7 +84,7 @@ class assignments(models.Model):
     assignment_id = models.IntegerField(primary_key=True)
     teacher_id = models.CharField(max_length=9)
     description = models.TextField()
-    subject = models.CharField(max_length=40)
+    subject = models.CharField(max_length=40, blank=True)
     due_date = models.DateTimeField(default=datetime.datetime.now, blank=True)
 
 
