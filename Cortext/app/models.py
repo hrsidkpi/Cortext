@@ -39,13 +39,13 @@ class Teacher(models.Model):
 
 
 class Question(models.Model):
-    question_id = models.IntegerField(primary_key=True)
+    question_id = models.AutoField(primary_key=True)
     assignment_id = models.IntegerField(default=-1)
     content = models.TextField()
 
 
 class Submission(models.Model):
-    submission_id = models.IntegerField(primary_key=True)
+    submission_id = models.AutoField(primary_key=True)
     student_id = models.CharField(max_length=9)
     # teacher_id = models.CharField(max_length=9)
     assignment_id = models.IntegerField()
@@ -54,7 +54,7 @@ class Submission(models.Model):
 
 
 class Answers(models.Model):
-    answer_id = models.IntegerField(primary_key=True)
+    answer_id = models.AutoField(primary_key=True)
     submission_id = models.IntegerField()
     question_id = models.IntegerField()
     content = models.TextField()
@@ -81,7 +81,7 @@ class class_student(models.Model):
 
 
 class assignments(models.Model):
-    assignment_id = models.IntegerField(primary_key=True)
+    assignment_id = models.AutoField(primary_key=True)
     teacher_id = models.CharField(max_length=9)
     description = models.TextField()
     subject = models.CharField(max_length=40, blank=True)
