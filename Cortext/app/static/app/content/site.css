@@ -40,3 +40,29 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+.commentable {
+    display: block;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 10px
+}
+
+.commented .original {
+    background-color: yellow;
+    display: inline;
+}
+
+.commented {
+    display: inline;
+    overflow: hidden;
+}
+
+.comment {
+    display: none;
+    background-color: red;
+}
+
+.commented:hover .comment{
+    display: inline;
+}

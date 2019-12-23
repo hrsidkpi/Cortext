@@ -6,21 +6,76 @@
     <h1>{{submission.1}}'s submission for {{assignment.1}}</h1>
 </div>
 
+<script>
+
+    var selected_text = "";
+    var selected_div = null;
+
+    $(document).ready(function () {
+        $('.add_comment').on('mousedown', function () {
+            selected_text = document.getSelection().toString();
+            selected_div = document.activeElement;
+            $('#myModal').modal('toggle');
+            $('#comment_for').text("Comment on '" + selected_text + "'");
+            event.preventDefault();
+        });
+        $('.submit_comment').on('mousedown', function () {
+            ntext = "<div class='commented'><div class='original'>" + selected_text + "</div><div class='comment'> ";
+            ntext += $("#comment_text").val();
+            ntext += "</div></div>"
+            ntext = selected_div.innerHTML.toString().replace(selected_text, ntext);
+            selected_div.innerHTML = ntext;
+            event.preventDefault();
+            $('#myModal').modal('toggle');
+        });
+        $('.comment').hide();
+        $('.commented').on('mousedown', function () {
+            alert(this);
+            $(this).find('.comment').show();
+        }).on('mouseleave', function () {
+            $(this).find('.comment').hide();
+        });
+    });
+
+
+</script>
+
 <form id="form" method="post" name="form" action="/home/">
 
     {% csrf_token %}
 
     {% for a in answers %}
     <h3>{{a.1}}</h3>
-    <p>{{a.2}}</p>
-    <textarea form="form" name="notes{{a.0}}">notes...</textarea>
+    <div class="commentable answer" contenteditable="true" id="a{{a.0}}">{{a.2}}</div>
+    <button type="button" class="btn btn-primary add_comment">Add Comment</button>
     {% endfor %}
 
     <br />
     <br />
-    <input type="submit" value="שמור" />
+    <input type="submit" class="btn btn-primary" value="Save" />
     <br />
 
 </form>
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" id="comment_for">Comment for</h4>
+      </div>
+      <div class="modal-body">
+        <p>Enter comment:</p>
+        <input form="form" class="commentable" id="comment_text" placeholder="comment"/>
+        <button type="button" class="submit_comment btn btn-primary">Submit</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 {% endblock %}

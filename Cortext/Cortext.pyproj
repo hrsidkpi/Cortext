@@ -15,7 +15,7 @@
     <ProjectHome>.</ProjectHome>
     <ProjectTypeGuids>{5F0BE9CA-D677-4A4D-8806-6076C0FAAD37};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
     <StartupFile>manage.py</StartupFile>
-    <SearchPath>app;app;app</SearchPath>
+    <SearchPath>app;app;app;app;app\pages</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <WebBrowserUrl>http://localhost</WebBrowserUrl>
     <LaunchProvider>Django launcher</LaunchProvider>
@@ -35,10 +35,30 @@
     <Compile Include="app\APIs.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="app\pages\createassignment.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="app\pages\home.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="app\forms.py" />
     <Compile Include="app\models.py" />
+    <Compile Include="app\pages\login.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="app\pages\register.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="app\pages\studentassignment.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="app\pages\teacherassignment.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="app\pages\teachersubmission.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="app\tests.py" />
-    <Compile Include="app\views.py" />
     <Compile Include="app\__init__.py" />
     <Compile Include="app\migrations\__init__.py" />
     <Compile Include="Cortext\admin.py">
@@ -53,6 +73,7 @@
   <ItemGroup>
     <Folder Include="app\" />
     <Folder Include="app\migrations\" />
+    <Folder Include="app\pages\" />
     <Folder Include="app\static\" />
     <Folder Include="app\static\app\" />
     <Folder Include="app\static\app\content\" />

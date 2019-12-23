@@ -56,7 +56,7 @@ def get_user(user_id):
 def get_current_user():
     # like get_user, but return the current user that is logged in. Return None if 
     # not currently logged in.
-    return get_user(0)
+    return get_user(5)
 
 # Already implemented, no need to change
 def is_connected():
@@ -176,4 +176,9 @@ def get_submission(submissionid):
                 [
                     "my opinions is that school uniforms are good"    
                 ]]
+
+
+def logout():
+    pass
+    #Remove the current user from the session
 

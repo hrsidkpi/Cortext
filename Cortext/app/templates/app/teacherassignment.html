@@ -24,12 +24,12 @@
     {% csrf_token %}
 
     {% for q in questions %}
-    <textarea form="form" name="q{{q}}">{{q}}</textarea>
+    <textarea class="form-control" form="form" name="q{{q.0}}">{{q.1}}</textarea>
     {% endfor %}
 
     <br />
     <br />
-    <input type="submit" value="שמור" />
+    <input class="btn primary-btn" type="submit" value="Save" />
     <br />
 
 </form>
