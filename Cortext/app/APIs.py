@@ -55,13 +55,13 @@ def get_user(user_id):
     if len(student) == 1:
         student = student[0]
         details.append(user_id)
-        details.append(student.first_name)
+        details.append(str(student))
         details.append(2)
     teacher = Teacher.objects.filter(pk=user_id)
     if len(teacher) == 1:
         teacher = teacher[0]
         details.append(user_id)
-        details.append(teacher.first_name)
+        details.append(str(teacher))
         details.append(1)
     return details if len(details) != 0 else None
 
@@ -154,12 +154,17 @@ def get_submission(submissionid):
 # Create a new assignment with the title due_date and questions.
 # title is a string, due_date is a stirng, questions is an array of strings.
 def create_assignment(title, due_date, questions):
-    pass
-
+    a = assignments(teacher_id=get_current_user()[0], description=title, due_date=due_date)
+    a.save()
+    for q in questions:
+        Question(assignment_id=a.assignment_id, content=q).save()
+    all_students=Student.objects.all()
+    for s in all_students:
+        Submission(student_id=s.id, assignment_id=a.assignment_id).save()
 
 # Disconnect the current user (remove from session).
 def logout_current_user():
-    pass
+    current_request.session['username'] = None
 
 
 # Create a submission for the assignment with the given answers.
@@ -169,4 +174,13 @@ def create_submission(assignment, answers):
 
 # Save the new answers to the submission.
 def change_answers(submission, answers):
+
     pass
+
+def get_submission_student(assignment_id):
+    curr_student = get_current_user()
+    curr_submission = Submission.objects.filter(assignment_id=assignment_id, student_id=curr_student[0])[0]
+    return get_submission(curr_submission.submission_id).remove(curr_student[1])
+    pass
+    # [submissionid, sub_date, answers]
+    # return current student submission for that assignment
