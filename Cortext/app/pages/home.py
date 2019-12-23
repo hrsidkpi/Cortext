@@ -11,7 +11,8 @@ from app.APIs import *
 import app.pages.login as login
 
 def home(request):
-    request.session['username'] = None
+    if not 'username' in request.session:
+        request.session['username'] = None
     set_request(request)
 
     """Renders the home page."""

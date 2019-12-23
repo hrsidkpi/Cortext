@@ -1,0 +1,65 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h1>{{assignment.1}}</h1>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+		$(".submission-link").click(
+            function () {
+				var form = $('#finalform');
+				$('#submissionid').val(this.id.split("submission")[1]);
+				form.submit();
+			}
+		)
+	});
+</script>
+
+<form id="form" method="post" name="form" action="/home/">
+
+    {% csrf_token %}
+
+    {% for q in questions %}
+    <textarea class="form-control" form="form" name="q{{q.0}}">{{q.1}}</textarea>
+    {% endfor %}
+
+    <br />
+    <br />
+    <input style="visibility: hidden" class="btn primary-btn" type="submit" value="Save" />
+    <br />
+
+</form>
+
+<table class="table table-hover container">
+    <thread>
+        <tr>
+            <th scope="col">Student</th>
+            <th scope="col">Submission Date</th>
+        </tr>
+    </thread>
+    <tbody>
+
+
+        {% for submission in submissions %}
+
+        <tr class="submission-link" id="submission{{submission.0}}">
+            <td>{{ submission.1 }}</td>
+            <td>
+                {{ submission.2 }}
+            </td>
+        </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+
+<form id="finalform" hidden="hidden" method="post" action="/teachersubmission/">
+    {% csrf_token %}
+    <input type="text" name="submissionid" id="submissionid" />
+</form>
+
+{% endblock %}

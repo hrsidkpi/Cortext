@@ -12,16 +12,20 @@
 
     <input type="text" id="assignment_id" name="assignment_id" value="{{assignment.0}}"/>
 
-    {% for q in questions %}
-        <h3>{{q.1}}</h3>
-        <textarea class="form-control" form="form" name="answers[]">טקסט ניתן לעריכה</textarea>
+    {% for a in answers %}
+        <h3>{{a.1}}</h3>
+        <textarea class="form-control" form="form" name="answers[]">{{a.2}}</textarea>
     {% endfor %}
 
     <br />
     <br />
     <input class="btn btn-primary" style="visibility: hidden" type="submit" name="send" value="Save" />
     <br />
+    {%if submitted%}
+    <h2 style="color: lawngreen">Submitted</h2>
+    {%else%}
     <input class="btn btn-primary" type="submit" name="send" value="Submit"/>
+    {%endif%}
 
 </form>
 

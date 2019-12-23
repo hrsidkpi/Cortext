@@ -52,6 +52,9 @@
     <Compile Include="app\pages\studentassignment.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="app\pages\studentsubmission.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="app\pages\teacherassignment.py">
       <SubType>Code</SubType>
     </Compile>
@@ -87,6 +90,7 @@
     <Content Include="app\templates\app\loginpartial.html" />
     <Content Include="app\templates\app\register.html" />
     <Content Include="app\templates\app\createassignment.html" />
+    <Content Include="app\templates\app\studentsubmission.html" />
     <Content Include="app\templates\app\teachersubmission.html" />
     <Content Include="app\templates\app\teacherassignment.html" />
     <Content Include="app\templates\app\studentassignment.html" />
