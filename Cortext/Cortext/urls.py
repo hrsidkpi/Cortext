@@ -19,8 +19,11 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
     path('admin/', admin.site.urls),
 	path('studentassignment/', studentassignment.studentassignment, name='studentassignment'),
+	path('studentassignment/submit/', studentassignment.submit, name='studentassignment_submit'),
     path('createassignment/', createassignment.createassignment, name='createassignment'),
+    path('createassignment/submit/', createassignment.submit, name='createassignment_submit'),
     path('teacherassignment/', teacherassignment.teacherassignment, name='teacherassignment'),
     path('teachersubmission/', teachersubmission.teachersubmission, name='teachersubmission'),
+    path('teachersubmission/submit/', teachersubmission.submit, name='teachersubmission_submit'),
 
 ]

@@ -9,22 +9,26 @@
 <script>
 
     var selected_text = "";
-    var selected_div = null;
+    var selected_id = 0;
 
     $(document).ready(function () {
         $('.add_comment').on('mousedown', function () {
             selected_text = document.getSelection().toString();
-            selected_div = document.activeElement;
+            selected_id = document.activeElement.id.split('a')[1];
             $('#myModal').modal('toggle');
             $('#comment_for').text("Comment on '" + selected_text + "'");
             event.preventDefault();
         });
         $('.submit_comment').on('mousedown', function () {
+            selected_div = document.getElementById("a" + selected_id);
             ntext = "<div class='commented'><div class='original'>" + selected_text + "</div><div class='comment'> ";
             ntext += $("#comment_text").val();
             ntext += "</div></div>"
             ntext = selected_div.innerHTML.toString().replace(selected_text, ntext);
             selected_div.innerHTML = ntext;
+
+            $('#at' + selected_id).val(ntext);
+
             event.preventDefault();
             $('#myModal').modal('toggle');
         });
@@ -40,15 +44,18 @@
 
 </script>
 
-<form id="form" method="post" name="form" action="/home/">
+<form id="form" method="post" name="form" action="/teachersubmission/submit/">
 
     {% csrf_token %}
 
     {% for a in answers %}
     <h3>{{a.1}}</h3>
     <div class="commentable answer" contenteditable="true" id="a{{a.0}}">{{a.2}}</div>
+    <textarea form="form" style="visibility: hidden" id="at{{a.0}}" name="answers[]">{{a.2}}</textarea>
     <button type="button" class="btn btn-primary add_comment">Add Comment</button>
     {% endfor %}
+
+    <input type="text" style="visibility: hidden" name="submission_id" value="{{submission.0}}" />
 
     <br />
     <br />

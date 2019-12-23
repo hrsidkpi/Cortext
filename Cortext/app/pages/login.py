@@ -20,7 +20,6 @@ def submit(request):
         return render(request, 'app/login.html', {
                 'error':'incorrect username or password'
             })
-    request.session['userid'] = request.POST['user_id']
     return home.home(request)
 
 def logout(request):

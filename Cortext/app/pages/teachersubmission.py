@@ -3,6 +3,9 @@ from django.shortcuts import render
 from django.http import HttpRequest
 from django.http import HttpResponseRedirect
 from app.APIs import *
+import pages.home as home
+from django.views.decorators.http import require_POST
+from django.http import JsonResponse
 
 
 def teachersubmission(request):
@@ -21,3 +24,10 @@ def teachersubmission(request):
             'questions': questions,
             'answers': answers,
         })
+
+
+def submit(request):
+    submission = request.POST['submission_id']
+    answers = request.POST.getlist('answers[]')
+    change_answers(submission, answers)
+    return home.home()

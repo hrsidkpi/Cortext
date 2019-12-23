@@ -3,21 +3,21 @@
 {% block content %}
 
 <div class="jumbotron">
-    <input form="finalform" type="text" placeholder="assignment name" />
+    <input form="finalform" name="title" type="text" placeholder="assignment name" />
 </div>
 
-<form id="finalform" method="post" name="form" action="/home/">
+<form id="finalform" method="post" name="form" action="/createassignment/submit/">
 
     <script>
         function addQuestion() {
-            $('#questions').append("<input type='text' /><br/>");
+            $('#questions').append("<input type='text' id='questions[]' name='questions[]' class='form-control' /><br/>");
         }
     </script>
 
     {% csrf_token %}
 
     <p>Due date:</p>
-    <input type="date" />
+    <input type="date" id="due_date" name="due_date" />
 
     <div id="questions"></div>
 
@@ -26,9 +26,9 @@
 
     <br />
     <br />
-    <input type="submit" value="שמור" />
+    <input class="btn btn-primary" type="submit" name="send" value="Save" />
     <br />
-    <input type="submit" value="שלח"/>
+    <input class="btn btn-primary" type="submit" name="send" value="Submit"/>
 
 </form>
 

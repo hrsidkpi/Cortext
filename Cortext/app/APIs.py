@@ -63,8 +63,8 @@ def get_current_user():
     # like get_user, but return the current user that is logged in. Return None if 
     # not currently logged in.
 
-    return get_user(322780800)
-    #return get_user(234567890)
+    #return get_user(322780800)
+    return get_user(234567890)
 
 
 # Already implemented, no need to change
@@ -143,3 +143,21 @@ def get_submission(submissionid):
     answers = [a.content for a in answers]
     sub_date = submission.sub_date
     return [submissionid, str(sub_student), sub_date, answers]
+
+
+# Create a new assignment with the title due_date and questions.
+# title is a string, due_date is a stirng, questions is an array of strings.
+def create_assignment(title, due_date, questions):
+    pass
+
+# Disconnect the current user (remove from session).
+def logout():
+    pass
+
+# Create a submission for the assignment with the given answers.
+def create_submission(assignment, answers):
+    pass
+
+# Save the new answers to the submission.
+def change_answers(submission, answers):
+    pass
