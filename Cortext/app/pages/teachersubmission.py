@@ -23,6 +23,7 @@ def teachersubmission(request):
             'submission': submission,
             'questions': questions,
             'answers': answers,
+            'username':get_current_user()[1]
         })
 
 
@@ -30,4 +31,4 @@ def submit(request):
     submission = request.POST['submission_id']
     answers = request.POST.getlist('answers[]')
     change_answers(submission, answers)
-    return home.home()
+    return home.home(request)

@@ -151,7 +151,7 @@ def create_assignment(title, due_date, questions):
     pass
 
 # Disconnect the current user (remove from session).
-def logout():
+def logout_current_user():
     pass
 
 # Create a submission for the assignment with the given answers.

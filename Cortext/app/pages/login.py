@@ -23,5 +23,5 @@ def submit(request):
     return home.home(request)
 
 def logout(request):
-    logout()
+    logout_current_user()
     return render(request, 'app/login.html', {})

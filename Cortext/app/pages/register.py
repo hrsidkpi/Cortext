@@ -31,4 +31,4 @@ def submit(request):
         school = request.POST['school']
         create_student(user_id, password, first_name, last_name, school, -1)
 
-    return login.login()
+    return login.login(request)

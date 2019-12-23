@@ -12,7 +12,8 @@ def studentassignment(request):
     questions = get_questions_assignment(assignmentid)
     return render(request, 'app/studentassignment.html', {
         'assignment': assignment,
-        'questions': questions
+        'questions': questions,
+        'username': get_current_user()[1]
         })
 
 def submit(request):
@@ -20,4 +21,4 @@ def submit(request):
     answers = request.POST['answers']
     create_submission(id, answers)
 
-    return home.home()
+    return home.home(request)

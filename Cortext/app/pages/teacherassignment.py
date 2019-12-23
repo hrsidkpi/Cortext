@@ -13,4 +13,5 @@ def teacherassignment(request):
             'assignment':assignment,
             'questions':questions,
             'submissions':submissions,
+            'username':get_current_user()[1]
         })

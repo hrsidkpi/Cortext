@@ -16,7 +16,7 @@ urlpatterns = [
     path('login/submit/', login.submit, name='login_submit'),
     path('register/', register.register, name='register'),
     path('register/submit/', register.submit, name='register_submit'),
-    path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
+    path('logout/', login.logout, name='logout'),
     path('admin/', admin.site.urls),
 	path('studentassignment/', studentassignment.studentassignment, name='studentassignment'),
 	path('studentassignment/submit/', studentassignment.submit, name='studentassignment_submit'),
