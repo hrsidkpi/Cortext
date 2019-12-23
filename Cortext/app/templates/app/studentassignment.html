@@ -11,15 +11,15 @@
     {% csrf_token %}
 
     {% for q in questions %}
-        <h3>{{q}}</h3>
-        <textarea form="form" name="q{{q}}">טקסט ניתן לעריכה</textarea>
+        <h3>{{q.1}}</h3>
+        <textarea class="form-control" form="form" name="q{{q.0}}">טקסט ניתן לעריכה</textarea>
     {% endfor %}
 
     <br />
     <br />
-    <input type="submit" value="שמור" />
+    <input class="btn btn-primary" type="submit" value="Save" />
     <br />
-    <input type="submit" value="הגש"/>
+    <input class="btn btn-primary" type="submit" value="Submit"/>
 
 </form>
 

@@ -8,18 +8,18 @@ from django.http import HttpRequest
 from django.http import HttpResponseRedirect
 from app.APIs import *
 
+import pages.login as login
 
 def home(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
     username = ""
     type = -1
-    if not 'userid' in request.session:
-        return login(request)
 
-    #userid = request.session["userid"]
-    userid = 234567890
-    user = get_user(userid)
+    if not is_connected():
+        return login.login(request)
+
+    user = get_current_user()
     type = user[2]
 
     if type == 1:

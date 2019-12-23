@@ -62,12 +62,14 @@ def get_user(user_id):
 def get_current_user():
     # like get_user, but return the current user that is logged in. Return None if 
     # not currently logged in.
-    return get_user(0)
+
+    return get_user(322780800)
+    #return get_user(234567890)
 
 
 # Already implemented, no need to change
 def is_connected():
-    return get_current_user()
+    return get_current_user() != None
 
 
 # get data on assignment from assignment id
