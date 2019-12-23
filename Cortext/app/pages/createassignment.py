@@ -4,17 +4,17 @@ from django.http import HttpRequest
 from django.http import HttpResponseRedirect
 from app.APIs import *
 
-import pages.home as home
+import app.pages.home as home
 
 def createassignment(request):
-    current_request = request
+    set_request(request)
 
     return render(request, 'app/createassignment.html',{
             'username':get_current_user[1]
         })
 
 def submit(request):
-    current_request = request
+    set_request(request)
 
     if request.POST['send'] == "Save":
         pass

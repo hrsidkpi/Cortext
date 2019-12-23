@@ -8,15 +8,15 @@ from django.http import HttpRequest
 from django.http import HttpResponseRedirect
 from app.APIs import *
 
-import pages.login as login
+import app.pages.login as login
 
 def register(request):
-    current_request = request
+    set_request(request)
 
     return render(request, 'app/register.html',{})
 
 def submit(request):
-    current_request = request
+    set_request(request)
 
     if user_exists(request.POST['user_id']):
         return render(request, 'app/register.html',{

@@ -2,8 +2,11 @@
 from .models import *
 import datetime
 
-
 current_request = None
+
+def set_request(request):
+    global current_request
+    current_request = request
 
 def create_student(id, password, first_name, last_name, school, agegroup):
     Student(password=password, id=id, first_name=first_name, last_name=last_name, school=school,
@@ -36,10 +39,11 @@ def get_assignments_user(user_id):
 def attempt_login(user_id, password):
     student = Student.objects.filter(pk=user_id, password=password)
     if len(student) == 1:
-        
+        current_request.session['username'] = user_id
         return True
     teacher = Teacher.objects.filter(pk=user_id, password=password)
     if len(teacher) == 1:
+        current_request.session['username'] = user_id
         return True
     return False
 
@@ -59,16 +63,15 @@ def get_user(user_id):
         details.append(user_id)
         details.append(teacher.first_name)
         details.append(1)
-    return details
+    return details if len(details) != 0 else None
 
 
 def get_current_user():
     # like get_user, but return the current user that is logged in. Return None if 
     # not currently logged in.
 
-    return get_user(322780800)
-    #return get_user(234567890)
-    #return None
+    return get_user(current_request.session['username'])
+
 
 # Already implemented, no need to change
 def is_connected():
@@ -101,7 +104,7 @@ def get_questions_assignment(assignment_id):
 # get assignments grouped by class for a teacher id
 def get_class_name(class_id):
     int_to_letters = {"01": "א", "02": "ב", "03": "ג", "04": "ד", "05": "ה", "06": "ו", "07": "ז", "08": "ח", "09": "ט",
-                      "10": "י", "11": "יא", "12": "יב", "22":"יב"}
+                      "10": "י", "11": "יא", "12": "יב", "22": "יב"}
     class_number = class_id[-1] if class_id[8] == '0' else class_id[8:10]
     return int_to_letters[class_id[6:8]] + class_number
 
@@ -153,13 +156,16 @@ def get_submission(submissionid):
 def create_assignment(title, due_date, questions):
     pass
 
+
 # Disconnect the current user (remove from session).
 def logout_current_user():
     pass
 
+
 # Create a submission for the assignment with the given answers.
 def create_submission(assignment, answers):
     pass
+
 
 # Save the new answers to the submission.
 def change_answers(submission, answers):
