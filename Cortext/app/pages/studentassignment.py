@@ -7,6 +7,8 @@ import pages.home as home
 
 
 def studentassignment(request):
+    current_request = request
+
     assignmentid = request.POST['assignmentid']
     assignment = get_assignment(assignmentid)
     questions = get_questions_assignment(assignmentid)
@@ -17,6 +19,8 @@ def studentassignment(request):
         })
 
 def submit(request):
+    current_request = request
+
     id = request.POST['assignment_id']
     answers = request.POST['answers']
     create_submission(id, answers)

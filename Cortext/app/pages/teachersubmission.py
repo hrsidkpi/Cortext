@@ -28,6 +28,8 @@ def teachersubmission(request):
 
 
 def submit(request):
+    current_request = request
+
     submission = request.POST['submission_id']
     answers = request.POST.getlist('answers[]')
     change_answers(submission, answers)

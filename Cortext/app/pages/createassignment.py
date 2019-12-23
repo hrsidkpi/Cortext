@@ -7,11 +7,15 @@ from app.APIs import *
 import pages.home as home
 
 def createassignment(request):
+    current_request = request
+
     return render(request, 'app/createassignment.html',{
             'username':get_current_user[1]
         })
 
 def submit(request):
+    current_request = request
+
     if request.POST['send'] == "Save":
         pass
     if request.POST['send'] == "Submit":

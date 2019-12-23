@@ -11,9 +11,13 @@ from app.APIs import *
 import pages.login as login
 
 def register(request):
+    current_request = request
+
     return render(request, 'app/register.html',{})
 
 def submit(request):
+    current_request = request
+
     if user_exists(request.POST['user_id']):
         return render(request, 'app/register.html',{
                 'errorTxt': 'Username already exsists',

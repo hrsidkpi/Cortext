@@ -11,6 +11,8 @@ from app.APIs import *
 import pages.login as login
 
 def home(request):
+    current_request = request
+
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
     username = ""
@@ -28,6 +30,8 @@ def home(request):
         return student_home(request, user)
 
 def teacher_home(request, user):
+    current_request = request
+
     classes = get_classes_teacher(user[0])
     return render(request,
         'app/teacherhome.html',
@@ -39,6 +43,8 @@ def teacher_home(request, user):
         })
 
 def student_home(request, user):
+    current_request = request
+
     assignments = get_assignments_user(user[0])
     return render(request,
         'app/studenthome.html',

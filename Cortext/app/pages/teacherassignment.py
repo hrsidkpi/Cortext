@@ -5,6 +5,8 @@ from django.http import HttpResponseRedirect
 from app.APIs import *
 
 def teacherassignment(request):
+    current_request = request
+
     assignmentid = request.POST['assignmentid']
     assignment = get_assignment(assignmentid)
     questions = get_questions_assignment(assignmentid)
