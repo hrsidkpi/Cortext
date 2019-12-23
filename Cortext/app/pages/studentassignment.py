@@ -4,17 +4,17 @@ from django.http import HttpRequest
 from django.http import HttpResponseRedirect
 from app.APIs import *
 import app.pages.home as home
+from django.views.decorators.http import require_POST
+from django.http import JsonResponse
 
 
 def studentassignment(request):
     set_request(request)
 
     assignmentid = request.POST['assignmentid']
-    #submission = get_submission_student(assignmentid)
     assignment = get_assignment(assignmentid)
+    submission = get_submission_student(assignmentid)
     questions = get_questions_assignment(assignmentid)
-
-    submission = [0, None, ["a", "b"]]
 
     answers = []
     for i in range(len(submission[2])):
@@ -32,7 +32,7 @@ def submit(request):
     set_request(request)
 
     id = request.POST['assignment_id']
-    answers = request.POST['answers']
+    answers = request.POST.getlist('answers[]')
     create_submission(id, answers)
 
     return home.home(request)

@@ -10,11 +10,17 @@
 
     {% csrf_token %}
 
-    <input type="text" id="assignment_id" name="assignment_id" value="{{assignment.0}}"/>
+    <input type="text" style="visibility: hidden" id="assignment_id" name="assignment_id" value="{{assignment.0}}"/>
 
     {% for a in answers %}
         <h3>{{a.1}}</h3>
-        <textarea class="form-control" form="form" name="answers[]">{{a.2}}</textarea>
+    <script>
+        $(document).ready(function () {
+            document.getElementById( "a" + "{{a.0}}" ).innerHTML = "{{a.2}}";
+        });
+    </script>
+        <div class="commentable answer" contenteditable="true" id="a{{a.0}}"></div>
+        <textarea style="visibility:hidden" class="form-control" form="form" name="answers[]">{{a.2}}</textarea>
     {% endfor %}
 
     <br />

@@ -103,10 +103,11 @@ def get_questions_assignment(assignment_id):
 
 # get assignments grouped by class for a teacher id
 def get_class_name(class_id):
-    int_to_letters = {"01": "א", "02": "ב", "03": "ג", "04": "ד", "05": "ה", "06": "ו", "07": "ז", "08": "ח", "09": "ט",
-                      "10": "י", "11": "יא", "12": "יב", "22": "יב"}
-    class_number = class_id[-1] if class_id[8] == '0' else class_id[8:10]
-    return int_to_letters[class_id[6:8]] + class_number
+    #int_to_letters = {"01": "א", "02": "ב", "03": "ג", "04": "ד", "05": "ה", "06": "ו", "07": "ז", "08": "ח", "09": "ט",
+    #                  "10": "י", "11": "יא", "12": "יב", "22": "יב"}
+    #class_number = class_id[-1] if class_id[8] == '0' else class_id[8:10]
+    #return int_to_letters[class_id[6:8]] + class_number
+    return "ג4"
 
 
 def get_classes_teacher(teacher_id):
@@ -180,7 +181,8 @@ def change_answers(submission, answers):
 def get_submission_student(assignment_id):
     curr_student = get_current_user()
     curr_submission = Submission.objects.filter(assignment_id=assignment_id, student_id=curr_student[0])[0]
-    return get_submission(curr_submission.submission_id).remove(curr_student[1])
-    pass
+    res = get_submission(curr_submission.submission_id)
+    res.remove(curr_student[1])
+    return  res
     # [submissionid, sub_date, answers]
     # return current student submission for that assignment
