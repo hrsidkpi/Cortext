@@ -175,7 +175,11 @@ def create_submission(assignment, answers):
 
 # Save the new answers to the submission.
 def change_answers(submission, answers):
-
+    s = Submission.objects.filter(pk=submission)[0]
+    dbans = Answers.objects.filter(submission_id=submission)
+    for i in range(len(answers)):
+        dbans.content = answers[i]
+        dbans.save()
     pass
 
 def get_submission_student(assignment_id):
