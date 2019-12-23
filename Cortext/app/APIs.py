@@ -4,6 +4,9 @@ import datetime
 
 current_request = None
 
+def set_request(request):
+    global current_request
+    current_request = request
 
 def create_student(id, password, first_name, last_name, school, agegroup):
     Student(password=password, id=id, first_name=first_name, last_name=last_name, school=school,

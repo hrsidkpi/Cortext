@@ -3,11 +3,11 @@ from django.shortcuts import render
 from django.http import HttpRequest
 from django.http import HttpResponseRedirect
 from app.APIs import *
-import pages.home as home
+import app.pages.home as home
 
 
 def studentassignment(request):
-    current_request = request
+    set_request(request)
 
     assignmentid = request.POST['assignmentid']
     assignment = get_assignment(assignmentid)
@@ -19,7 +19,7 @@ def studentassignment(request):
         })
 
 def submit(request):
-    current_request = request
+    set_request(request)
 
     id = request.POST['assignment_id']
     answers = request.POST['answers']

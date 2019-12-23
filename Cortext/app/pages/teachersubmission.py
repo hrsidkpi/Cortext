@@ -3,12 +3,14 @@ from django.shortcuts import render
 from django.http import HttpRequest
 from django.http import HttpResponseRedirect
 from app.APIs import *
-import pages.home as home
+import app.pages.home as home
 from django.views.decorators.http import require_POST
 from django.http import JsonResponse
 
 
 def teachersubmission(request):
+    set_request(request)
+
     submissionid = request.POST['submissionid']
     assignment = get_assignment_submission(submissionid)
     questions = get_questions_assignment(assignment[0])
@@ -28,7 +30,7 @@ def teachersubmission(request):
 
 
 def submit(request):
-    current_request = request
+    set_request(request)
 
     submission = request.POST['submission_id']
     answers = request.POST.getlist('answers[]')
