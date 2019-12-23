@@ -5,7 +5,6 @@ import datetime
 
 from django.db import models
 
-
 # Create your models here.
 class Student(models.Model):
     username = models.CharField(max_length=20, null=True, blank=True)
@@ -42,15 +41,16 @@ class Teacher(models.Model):
 class Question(models.Model):
     question_id = models.IntegerField(primary_key=True)
     assignment_id = models.IntegerField(default=-1)
-    content = models.CharField(max_length=20)
+    content = models.TextField()
 
 
 class Submission(models.Model):
     submission_id = models.IntegerField(primary_key=True)
     student_id = models.CharField(max_length=9)
-    teacher_id = models.CharField(max_length=9)
+    # teacher_id = models.CharField(max_length=9)
     assignment_id = models.IntegerField()
-    grade = models.IntegerField()
+    grade = models.IntegerField(default=-1)
+    sub_date = models.DateTimeField(default=datetime.datetime.now, blank=True)
 
 
 class Answers(models.Model):
@@ -62,7 +62,7 @@ class Answers(models.Model):
 
 class teacher_class(models.Model):
     teacher_id = models.CharField(max_length=9)
-    school_id = models.CharField(max_length=6)
+    class_id = models.CharField(max_length=10)
 
 
 class teacher_student(models.Model):
@@ -76,20 +76,22 @@ class files(models.Model):
 
 
 class class_student(models.Model):
-    class_id = models.CharField(max_length=9)
+    class_id = models.CharField(max_length=10)
     student_id = models.CharField(max_length=9)
 
 
 class assignments(models.Model):
-    assignment_id = models.CharField(max_length=9)
+    assignment_id = models.IntegerField(primary_key=True)
     teacher_id = models.CharField(max_length=9)
     description = models.TextField()
     subject = models.CharField(max_length=40)
+    due_date = models.DateTimeField(default=datetime.datetime.now, blank=True)
+
 
 
 class assignment_class(models.Model):
     assignment_id = models.CharField(max_length=9)
-    class_id = models.CharField(max_length=9)
+    class_id = models.CharField(max_length=10)
     submission_date = models.DateField(default=datetime.date.today())
 
 
