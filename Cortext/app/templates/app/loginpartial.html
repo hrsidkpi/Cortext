@@ -1,9 +1,9 @@
 ﻿<ul class="nav navbar-nav" style="float: right">
-    {%if user_id != 0 %}
-    <li>{{username}}</li>
+    {%if username != None %}
+    <li><a>{{username}}</a></li>
     <li><a href="{%url 'logout'%}">Logout</a></li>
     {%endif%}
-    {%if user_id == 0 %}
+    {%if username == None %}
     <li><a href="{% url 'login' %}">Login</a></li>
     <li><a href="{% url 'register' %}">Register</a></li>
     {%endif%}

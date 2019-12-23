@@ -63,9 +63,9 @@ def get_current_user():
     # like get_user, but return the current user that is logged in. Return None if 
     # not currently logged in.
 
-    #return get_user(322780800)
-    return get_user(234567890)
-
+    return get_user(322780800)
+    #return get_user(234567890)
+    #return None
 
 # Already implemented, no need to change
 def is_connected():
