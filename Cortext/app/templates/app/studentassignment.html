@@ -11,6 +11,7 @@
     {% csrf_token %}
 
     <input type="text" style="visibility: hidden" id="assignment_id" name="assignment_id" value="{{assignment.0}}"/>
+    <input type="text" style="visibility: hidden" id="submission_id" name="submission_id", value="{{submissionid}}"/>
 
     {% for a in answers %}
         <h3>{{a.1}}</h3>
@@ -19,8 +20,15 @@
             document.getElementById( "a" + "{{a.0}}" ).innerHTML = "{{a.2}}";
         });
     </script>
+    <script>
+        $(document).ready(function () {
+            $('.answer').on('DOMSubtreeModified', function (event) {
+                $('#at' + event.target.id.split('a')[1]).text(event.target.innerHTML);
+            });
+        });
+    </script>
         <div class="commentable answer" contenteditable="true" id="a{{a.0}}"></div>
-        <textarea style="visibility:hidden" class="form-control" form="form" name="answers[]">{{a.2}}</textarea>
+        <textarea style="visibility:hidden" class="form-control" form="form" name="answers[]" id="at{{a.0}}">{{a.2}}</textarea>
     {% endfor %}
 
     <br />

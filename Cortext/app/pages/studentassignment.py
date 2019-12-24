@@ -25,14 +25,15 @@ def studentassignment(request):
         'questions': questions,
         'username': get_current_user()[1],
         'answers': answers,
+        'submissionid': submission[0],
         'submitted': False
         })
 
 def submit(request):
     set_request(request)
 
-    id = request.POST['assignment_id']
+    submission_id = request.POST['submission_id']
     answers = request.POST.getlist('answers[]')
-    create_submission(id, answers)
+    change_answers(submission_id, answers)
 
     return home.home(request)

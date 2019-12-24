@@ -157,11 +157,15 @@ def get_submission(submissionid):
 def create_assignment(title, due_date, questions):
     a = assignments(teacher_id=get_current_user()[0], description=title, due_date=due_date)
     a.save()
+    assignment_class(assignment_id=a.assignment_id, class_id='0').save()
     for q in questions:
         Question(assignment_id=a.assignment_id, content=q).save()
     all_students=Student.objects.all()
     for s in all_students:
-        Submission(student_id=s.id, assignment_id=a.assignment_id).save()
+        sub = Submission(student_id=s.id, assignment_id=a.assignment_id)
+        sub.save()
+        for q in Question.objects.filter(assignment_id=sub.assignment_id):
+            Answers(submission_id=sub.submission_id, question_id=q.question_id, content="").save()
 
 # Disconnect the current user (remove from session).
 def logout_current_user():
@@ -178,8 +182,8 @@ def change_answers(submission, answers):
     s = Submission.objects.filter(pk=submission)[0]
     dbans = Answers.objects.filter(submission_id=submission)
     for i in range(len(answers)):
-        dbans.content = answers[i]
-        dbans.save()
+        Answers.objects.filter(pk=dbans[i].pk).update(content=answers[i])
+        dbans[i].save()
     pass
 
 def get_submission_student(assignment_id):
