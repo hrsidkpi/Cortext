@@ -35,6 +35,9 @@
     <Compile Include="app\APIs.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="app\pages\admin.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="app\pages\createassignment.py">
       <SubType>Code</SubType>
     </Compile>
@@ -84,6 +87,9 @@
     <Folder Include="Cortext\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\templates\app\admin.html">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="app\templates\app\loginpartial.html" />
     <Content Include="app\templates\app\register.html" />
     <Content Include="app\templates\app\createassignment.html" />

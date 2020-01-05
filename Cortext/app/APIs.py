@@ -63,6 +63,10 @@ def get_user(user_id):
         details.append(user_id)
         details.append(str(teacher))
         details.append(1)
+
+    #TODO- get admins too. admins should have 1 more field in their details, their school id
+    # [id, name, 3, scool_id]
+
     return details if len(details) != 0 else None
 
 
@@ -194,3 +198,21 @@ def get_submission_student(assignment_id):
     return  res
     # [submissionid, sub_date, answers]
     # return current student submission for that assignment
+
+
+# Get array of teachers belonging to the school.
+# Array of users, each format like get_user() format.
+def get_teachers_school(school_id):
+    pass
+
+# Set the teachers of the school to all the teachers in the array teachers.
+# Some of the teachers in the array may already be in the database, 
+# so this function needs to check it and not add them if that is the case.
+# The teacher format is:
+# [id, name]
+# OR
+# [id, name, password].
+# If the former is used, don't change the teacher's password.
+# If the later is used, change the teacher's password to the given password.
+def set_teachers_school(school_id, teachers):
+    pass
