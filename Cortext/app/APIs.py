@@ -14,8 +14,10 @@ def create_student(id, password, first_name, last_name, school, agegroup):
 
 
 def create_teacher(id, password, first_name, last_name):
-    Teacher(password=password, id=id, first_name=first_name, last_name=last_name).save()
-
+    teacher_object = Teacher.objects.filter(id=id)
+    if len(teacher_object) == 0:
+        Teacher(password=password, id=id, first_name=first_name, last_name=last_name).save()
+    raise Exception("Teacher already exits")
 
 # return weather the user id is already registered
 def user_exists(user_id):
@@ -102,7 +104,9 @@ def get_assignment(assignment_id):
 # format:[  [question_id, question_text] , ...  ]
 def get_questions_assignment(assignment_id):
     questions = Question.objects.filter(assignment_id=assignment_id)
-    return [[q.question_id, q.content] for q in questions]
+    if questions:
+        return [[q.question_id, q.content] for q in questions]
+    return None
 
 
 # get assignments grouped by class for a teacher id
@@ -182,6 +186,7 @@ def create_submission(assignment, answers):
 
 
 # Save the new answers to the submission.
+#mark
 def change_answers(submission, answers):
     s = Submission.objects.filter(pk=submission)[0]
     dbans = Answers.objects.filter(submission_id=submission)
@@ -203,7 +208,37 @@ def get_submission_student(assignment_id):
 # Get array of teachers belonging to the school.
 # Array of users, each format like get_user() format.
 def get_teachers_school(school_id):
-    pass
+    #gets all school classes id
+    school_classes = [cls.id for cls in Class.objects.filter(school_id = school_id)]
+    teachers_id = []
+    all_teachers = []
+    for c in school_classes:
+        #Gets all teacher id_s of specific class
+        teachers_id = [t.teacher_id for t in teacher_class.objects.filter(class_id=c)]
+    #requires a merge of similar teachers id
+    teachers_id = list(set(teachers_id))
+    for i in teachers_id:
+        all_teachers.append(get_user(i))
+    return all_teachers
+
+
+def get_students_school(school_id):
+    #gets all school classes id
+    school_classes = [cls.id for cls in Class.objects.filter(school_id = school_id)]
+    students_id = []
+    all_students = []
+    for c in school_classes:
+        #Gets all studentsid_ of specific class
+        students_id = [s.student_id for s in class_student.objects.filter(class_id=c)]
+    #requires a merge of similar teachers id
+    students_id = list(set(students_id))
+    for i in students_id:
+        all_students.append(get_user(i))
+    return all_students
+
+
+
+
 
 # Set the teachers of the school to all the teachers in the array teachers.
 # Some of the teachers in the array may already be in the database, 
@@ -215,4 +250,31 @@ def get_teachers_school(school_id):
 # If the former is used, don't change the teacher's password.
 # If the later is used, change the teacher's password to the given password.
 def set_teachers_school(school_id, teachers):
-    pass
+    for teacher in teachers:
+        tmp_id = teacher[0]
+        teacher_object = Teacher.objects.filter(id=tmp_id)
+        if len(teacher_object) == 0:
+            first_name, last_name = teacher[1].split()
+            create_teacher(tmp_id, teacher[2], first_name, last_name)
+            teacher_school(school_id=school_id, teacher_id=tmp_id).save()
+        else:
+            if len(teacher) == 3:
+                teacher_object.update(password=teacher[2])
+            if len(teacher_school.objects.filter(teacher_id=tmp_id)) == 0:
+                teacher_school(school_id=school_id, teacher_id=tmp_id).save()
+
+def set_students_school(school_id, students):
+    for student in students:
+        tmp_id = student[0]
+        student_object = Student.objects.filter(id=tmp_id)
+        if len(student_object) == 0:
+            first_name, last_name = student[1].split()
+            create_student(tmp_id, student[2], first_name, last_name)
+            student_school(school_id=school_id, teacher_id=tmp_id).save()
+        else:
+            if len(student) == 3:
+                student_object.update(password=student[2])
+            if len(student_school.objects.filter(student_id=tmp_id)) == 0:
+                student_school(school_id=school_id, teacher_id=tmp_id).save()
+
+

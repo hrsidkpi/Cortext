@@ -7,7 +7,6 @@ from django.db import models
 
 # Create your models here.
 class Student(models.Model):
-    username = models.CharField(max_length=20, null=True, blank=True)
     password = models.CharField(max_length=20, null=True, blank=True)
     id = models.CharField(max_length=9, primary_key=True)
     first_name = models.CharField(max_length=20, null=True, blank=True)
@@ -19,6 +18,7 @@ class Student(models.Model):
         return str(self.first_name) + " " + str(self.last_name)
 
 
+
 class School(models.Model):
     id = models.CharField(max_length=6, primary_key=True)
     name = models.CharField(max_length=20)
@@ -28,7 +28,6 @@ class School(models.Model):
 
 
 class Teacher(models.Model):
-    username = models.CharField(max_length=20, null=True, blank=True)
     password = models.CharField(max_length=20, null=True, blank=True)
     id = models.CharField(max_length=9, primary_key=True)
     first_name = models.CharField(max_length=20, null=True, blank=True)
@@ -95,8 +94,22 @@ class assignment_class(models.Model):
     submission_date = models.DateField(default=datetime.date.today())
 
 
+
 class messages(models.Model):
     addressed_id = models.CharField(max_length=9)
     addressee_id = models.CharField(max_length=9)
     date = models.DateField(default=datetime.date.today())
     message_content = models.CharField(max_length=255)
+
+class Class(models.Model):
+
+    id = models.CharField(max_length=10, primary_key=True)
+    school_id = models.CharField(max_length=6)
+
+class teacher_school(models.Model):
+    teacher_id = models.CharField(max_length=9)
+    school_id = models.CharField(max_length=6)
+
+class student_school(models.Model):
+    student_id = models.CharField(max_length=9)
+    school_id = models.CharField(max_length=6)
