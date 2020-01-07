@@ -22,6 +22,7 @@ class Student(models.Model):
 class School(models.Model):
     id = models.CharField(max_length=6, primary_key=True)
     name = models.CharField(max_length=20)
+    password = models.CharField(max_length=20, null=True, blank=True)
 
     def __str__(self):
         return self.name

@@ -19,6 +19,9 @@ def create_teacher(id, password, first_name, last_name):
         Teacher(password=password, id=id, first_name=first_name, last_name=last_name).save()
     raise Exception("Teacher already exits")
 
+def create_school(id, name, password):
+    School(password=password, name=name, id=id).save()
+
 # return weather the user id is already registered
 def user_exists(user_id):
     return len(Student.objects.filter(pk=user_id)) == 1
@@ -45,6 +48,10 @@ def attempt_login(user_id, password):
         return True
     teacher = Teacher.objects.filter(pk=user_id, password=password)
     if len(teacher) == 1:
+        current_request.session['username'] = user_id
+        return True
+    school = Teacher.objects.filter(pk=user_id, password=password)
+    if len(school) == 1:
         current_request.session['username'] = user_id
         return True
     return False
