@@ -4,14 +4,63 @@
 {% block content %}
 
 
+<div class="jumbotron">
+    <h1>Admin for school {{school}}</h1>
+</div>
 
+<form id="form" method="post" name="form" action="/admin/submit/">
+
+    {% csrf_token %}
+    <h2>Teachers</h2>
+    <table class="table table-hover" id="container">
+		<thread>
+			<tr>
+				<th scope="col">Name</th>
+				<th scope="col">password</th>
+			</tr>
+		</thread>
+		<tbody>
+			{% for teacher in teachers %}
+
+			<tr class="assignment-link" id="teacher{{teacher.0}}">
+				<td><input type="text" name="tids[]" style="visibility:hidden" value="{{teacher.0}}" /></td>
+				<td><input type="text" name="tnames[]" value="{{teacher.1}}"/></td>
+				<td><input type="text" name="tpasswords[]" placeholder="new password (leave blank to not change)" /></td>
+			</tr>
+
+			{% endfor %}
+		</tbody>
+	</table>
+
+    <h2>Students</h2>
+    <table class="table table-hover" id="container">
+		<thread>
+			<tr>
+				<th scope="col">Name</th>
+				<th scope="col">password</th>
+			</tr>
+		</thread>
+		<tbody>
+			{% for student in students %}
+
+			<tr class="assignment-link" id="student{{student.0}}">
+				<td><input type="text" name="sids[]" style="visibility:hidden" value="{{student.0}}" /></td>
+				<td><input type="text" name="snames[]" value="{{student.1}}"/></td>
+				<td><input type="text" name="spasswords[]" placeholder="new password (leave blank to not change)" /></td>
+			</tr>
+
+			{% endfor %}
+		</tbody>
+	</table>
+
+</form>
 
 {% endblock %}
 
 
 {% block scripts %}
 
-    {% load staticfiles %}
+    {% load static %}
 <script src="{% static 'app/scripts/jquery.validate.min.js' %}"></script>
 
 {% endblock %}

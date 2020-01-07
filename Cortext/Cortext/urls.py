@@ -7,7 +7,7 @@ from django.urls import path
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
 from app.pages import home, login, register, teachersubmission, studentassignment, teacherassignment, createassignment
-
+from pages import adminpage
 
 urlpatterns = [
     path('', home.home, name='home'),
@@ -18,6 +18,8 @@ urlpatterns = [
     path('register/submit/', register.submit, name='register_submit'),
     path('logout/', login.logout, name='logout'),
     path('admin/', admin.site.urls),
+    path('adminpage/', adminpage.admin, name='admin'),
+    path('adminpage/submit/', adminpage.submit, name='admin'),
 	path('studentassignment/', studentassignment.studentassignment, name='studentassignment'),
 	path('studentassignment/submit/', studentassignment.submit, name='studentassignment_submit'),
     path('createassignment/', createassignment.createassignment, name='createassignment'),

@@ -63,7 +63,6 @@ def get_user(user_id):
         details.append(user_id)
         details.append(str(teacher))
         details.append(1)
-
     #TODO- get admins too. admins should have 1 more field in their details, their school id
     # [id, name, 3, scool_id]
 
