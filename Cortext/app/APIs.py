@@ -21,7 +21,7 @@ def create_teacher(id, password, first_name, last_name):
 
 def create_school(id, name, password):
     School(password=password, name=name, id=id).save()
-
+#f
 # return weather the user id is already registered
 def user_exists(user_id):
     return len(Student.objects.filter(pk=user_id)) == 1
